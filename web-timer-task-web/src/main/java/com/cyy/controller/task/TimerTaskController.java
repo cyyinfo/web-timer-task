@@ -1,13 +1,8 @@
 package com.cyy.controller.task;
 
-import com.cyy.common.job.ApiJob;
 import com.cyy.common.job.ApiMethodJob;
 import org.quartz.*;
-import org.quartz.impl.triggers.CronTriggerImpl;
-import org.quartz.spi.JobFactory;
-import org.springframework.scheduling.config.ScheduledTask;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
-import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +14,7 @@ import javax.annotation.Resource;
  * Created by Administrator on 2017/8/28.
  */
 @RestController
-@RequestMapping("/timer/task/")
+@RequestMapping("/task/")
 public class TimerTaskController {
 
     @Resource

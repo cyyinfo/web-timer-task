@@ -1,4 +1,4 @@
-package com.cyy.model.base;
+package com.cyy.model;
 
 /**
  * Created by Administrator on 2017/8/22.

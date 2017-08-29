@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAutoConfiguration
 @ImportResource("classpath:spring-all.xml")
 @EnableTransactionManagement
-public class WebDecorationApplication {
+public class WebTimerTaskApplication {
 	
 	public static void main(String[] args) {
-		SpringApplication.run(WebDecorationApplication.class, args);
+		SpringApplication.run(WebTimerTaskApplication.class, args);
 	}
 
 }

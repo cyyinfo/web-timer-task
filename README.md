@@ -6,15 +6,15 @@
 所以就另外独立出一个项目，专门跑定时任务，而那些需要执行的任务，通过接口暴露出来 提供给定时任务项目通过 api 执行。
 
 
-使用 spring boot + quartz + freemarker + mybatis + mysql
-前段使用技术  vue2.x + vue-resource + element(饿了么开源的基于 vue 的前段ui库)
-项目目录
+使用 spring boot + quartz + freemarker + mybatis + mysql \
+前端使用技术  vue2.x + vue-resource + element(饿了么开源的基于 vue 的前段ui库) \
 
-web-timer-task
-  |
-  |----timer-common
-  |----timer-model
-  |----timer-dao
-  |----timer-service
-  |----timer-config
-  |----timer-web
+项目目录 \
+web-timer-task \
+  | \
+  |----timer-common \
+  |----timer-model \
+  |----timer-dao \
+  |----timer-service \
+  |----timer-config \
+  |----timer-web \

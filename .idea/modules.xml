@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/web-timer-task.iml" filepath="$PROJECT_DIR$/web-timer-task.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-timer-task-common/web-timer-task-common.iml" filepath="$PROJECT_DIR$/web-timer-task-common/web-timer-task-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-timer-task-dao/web-timer-task-dao.iml" filepath="$PROJECT_DIR$/web-timer-task-dao/web-timer-task-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-timer-task-model/web-timer-task-model.iml" filepath="$PROJECT_DIR$/web-timer-task-model/web-timer-task-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-timer-task-service/web-timer-task-service.iml" filepath="$PROJECT_DIR$/web-timer-task-service/web-timer-task-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-timer-task-web/web-timer-task-web.iml" filepath="$PROJECT_DIR$/web-timer-task-web/web-timer-task-web.iml" />
+    </modules>
+  </component>
+</project>

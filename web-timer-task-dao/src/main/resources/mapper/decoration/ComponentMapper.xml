@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cyy.dao.decoration.DecorationComponentMapper">
+
+    <resultMap id="BaseResultMap" type="com.cyy.model.decoration.DecorationComponent">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="data_sources" jdbcType="VARCHAR" property="dataSources" />
+        <result column="html" jdbcType="VARCHAR" property="html" />
+        <result column="css" jdbcType="VARCHAR" property="css" />
+        <result column="js" jdbcType="VARCHAR" property="js" />
+    </resultMap>
+
+    <sql id="base_column">
+        id,`name`,`data_sources`,`html`,`css`,`js`
+    </sql>
+
+    <select id="find"  resultMap="BaseResultMap">
+        SELECT  <include refid="base_column" /> FROM decoration_component
+        WHERE 1=1
+        <if test="id != null and id > 0">
+            AND  id = #{id}
+        </if>
+    </select>
+
+    <insert id="save" parameterType="com.cyy.model.decoration.DecorationComponent">
+        INSERT INTO decoration_component (`name`,`data_sources`,`html`,`css`,`js`)
+         values(#{name},#{dataSources},#{html},#{css},#{js})
+    </insert>
+
+    <update id="update" parameterType="com.cyy.model.decoration.DecorationComponent">
+        UPDATE decoration_component
+        <set>
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="dataSources != null">
+                data_sources = #{dataSources},
+            </if>
+            <if test="html != null">
+                `html` = #{html},
+            </if>
+            <if test="css != null">
+                `css` = #{css},
+            </if>
+            <if test="js != null">
+                `js` = #{js},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+</mapper>

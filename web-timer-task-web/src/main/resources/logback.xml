@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <contextName>user-service</contextName>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{yyyy-MMM-dd HH:mm:ss.SSS} – [%7r] – [%6p] – [%t] – [%X{sessionId}] - [%X{platformId}] - [%X{domain}] - [%X{requestIp}] - [%X{localIp}] – [%C:%M] - %m%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_PATH}/user-service.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>
+                %d{yyyy-MMM-dd HH:mm:ss.SSS} – [%7r] – [%6p] – [%t] – [%X{sessionId}] - [%X{platformId}] - [%X{domain}] - [%X{requestIp}] - [%X{localIp}] – [%C:%M] - %m%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE-INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/user-service-info.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/user-service-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>500MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>
+                %d{yyyy-MMM-dd HH:mm:ss.SSS} – [%7r] – [%6p] – [%t] – [%X{sessionId}] - [%X{platformId}] - [%X{domain}] - [%X{requestIp}] - [%X{localIp}] – [%C:%M] - %m%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="RPC-REST-INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/rpc-rest-info.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/rpc-rest-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>500MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>
+                %d{yyyy-MMM-dd HH:mm:ss.SSS} – [%7r] – [%6p] – [%t] – [%X{sessionId}] - [%X{platformId}] - [%X{domain}] - [%X{requestIp}] - [%X{localIp}] – [%C:%M] - %m%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <springProfile name="local">
+        <logger name="com.jcloud" level="INFO">
+            <appender-ref ref="FILE-INFO" />
+        </logger>
+        <logger name="org.springframework" level="WARN">
+            <appender-ref ref="FILE-INFO" />
+        </logger>
+        <logger name="com.jcloud.b2c.user.rpc.service.impl.Open360ServiceImpl" level="INFO">
+            <appender-ref ref="RPC-REST-INFO" />
+        </logger>
+        <logger name="com.jcloud.b2c.user.rpc.service.impl.RestServiceImpl" level="INFO">
+            <appender-ref ref="RPC-REST-INFO" />
+        </logger>
+    </springProfile>
+
+    <springProfile name="dev_b2c">
+        <logger name="com.jcloud" level="INFO">
+            <appender-ref ref="FILE-INFO" />
+        </logger>
+        <logger name="org.springframework" level="WARN">
+            <appender-ref ref="FILE-INFO" />
+        </logger>
+        <logger name="com.jcloud.b2c.user.rpc.service.impl.Open360ServiceImpl" level="INFO">
+            <appender-ref ref="RPC-REST-INFO" />
+        </logger>
+        <logger name="com.jcloud.b2c.user.rpc.service.impl.RestServiceImpl" level="INFO">
+            <appender-ref ref="RPC-REST-INFO" />
+        </logger>
+    </springProfile>
+
+    <springProfile name="gray">
+        <logger name="com.jcloud" level="INFO">
+            <appender-ref ref="FILE-INFO" />
+        </logger>
+        <logger name="org.springframework" level="WARN">
+            <appender-ref ref="FILE-INFO" />
+        </logger>
+        <logger name="com.jcloud.b2c.user.rpc.service.impl.Open360ServiceImpl" level="INFO">
+            <appender-ref ref="RPC-REST-INFO" />
+        </logger>
+        <logger name="com.jcloud.b2c.user.rpc.service.impl.RestServiceImpl" level="INFO">
+            <appender-ref ref="RPC-REST-INFO" />
+        </logger>
+    </springProfile>
+
+    <springProfile name="gray_b2c">
+        <logger name="com.jcloud" level="INFO">
+            <appender-ref ref="FILE-INFO" />
+        </logger>
+        <logger name="org.springframework" level="WARN">
+            <appender-ref ref="FILE-INFO" />
+        </logger>
+        <logger name="com.jcloud.b2c.user.rpc.service.impl.Open360ServiceImpl" level="INFO">
+            <appender-ref ref="RPC-REST-INFO" />
+        </logger>
+        <logger name="com.jcloud.b2c.user.rpc.service.impl.RestServiceImpl" level="INFO">
+            <appender-ref ref="RPC-REST-INFO" />
+        </logger>
+    </springProfile>
+
+    <springProfile name="pre_b2c">
+        <logger name="com.jcloud" level="INFO">
+            <appender-ref ref="FILE-INFO" />
+        </logger>
+        <logger name="org.springframework" level="WARN">
+            <appender-ref ref="FILE-INFO" />
+        </logger>
+        <logger name="com.jcloud.b2c.user.rpc.service.impl.Open360ServiceImpl" level="INFO">
+            <appender-ref ref="RPC-REST-INFO" />
+        </logger>
+        <logger name="com.jcloud.b2c.user.rpc.service.impl.RestServiceImpl" level="INFO">
+            <appender-ref ref="RPC-REST-INFO" />
+        </logger>
+    </springProfile>
+
+    <springProfile name="prod_b2c">
+        <logger name="com.jcloud" level="INFO">
+            <appender-ref ref="FILE-INFO" />
+        </logger>
+        <logger name="org.springframework" level="WARN">
+            <appender-ref ref="FILE-INFO" />
+        </logger>
+        <logger name="com.jcloud.b2c.user.rpc.service.impl.Open360ServiceImpl" level="INFO">
+            <appender-ref ref="RPC-REST-INFO" />
+        </logger>
+        <logger name="com.jcloud.b2c.user.rpc.service.impl.RestServiceImpl" level="INFO">
+            <appender-ref ref="RPC-REST-INFO" />
+        </logger>
+    </springProfile>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+</configuration>

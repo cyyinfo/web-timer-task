@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.cyy.common.enums.ErrorCode;
 import com.cyy.common.util.ParamUtil;
+import com.github.pagehelper.Page;
 
 import java.util.List;
 
@@ -48,6 +49,20 @@ public class BaseController {
             }
         }
         json.put("lists",data);
+        return success(json);
+    }
+
+    public <T> String success(Page<T> page){
+        JSONObject json = new JSONObject();
+        json.put("totalPage",page.getPages());
+        json.put("totalRow",page.getTotal());
+        JSONArray data = new JSONArray();
+        if(page != null && page.size() > 0 ){
+            for(T t : page){
+                data.add(JSON.toJSON(t));
+            }
+        }
+        json.put("list",data);
         return success(json);
     }
 

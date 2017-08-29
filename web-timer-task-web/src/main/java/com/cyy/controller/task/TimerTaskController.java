@@ -1,6 +1,10 @@
 package com.cyy.controller.task;
 
 import com.cyy.common.job.ApiMethodJob;
+import com.cyy.controller.BaseController;
+import com.cyy.model.task.TimerTask;
+import com.cyy.service.timertask.TimerTaskService;
+import com.github.pagehelper.Page;
 import org.quartz.*;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean;
@@ -14,14 +18,25 @@ import javax.annotation.Resource;
  * Created by Administrator on 2017/8/28.
  */
 @RestController
-@RequestMapping("/task/")
-public class TimerTaskController {
+@RequestMapping("/api/task/")
+public class TimerTaskController extends BaseController {
+
+    @Resource
+    private TimerTaskService timerTaskService;
 
     @Resource
     private Scheduler scheduler;
 
     @Resource
     private ApiMethodJob jobObject;
+
+
+    @RequestMapping("list")
+    public String list(@RequestParam(value = "page")int page,@RequestParam(value = "pageSize")int pageSize){
+        TimerTask search = new TimerTask();
+        Page<TimerTask> result = timerTaskService.find(search,page,pageSize);
+        return success(result);
+    }
 
     @RequestMapping("add")
     public String addJob(@RequestParam(value = "jobName")String jobName,@RequestParam(value = "api")String api) throws Exception{

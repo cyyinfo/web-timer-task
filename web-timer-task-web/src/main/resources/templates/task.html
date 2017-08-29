@@ -1,1 +1,90 @@
-csddfs
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>任务管理</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="cyy" />
+		<meta name="renderer" content="webkit" />
+    	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+   		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="stylesheet" href="static/css/common.css">
+        <link rel="icon" type="image/x-icon" href="static/img/ico_64.ico"/>
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+        <style>
+            *{box-sizing: border-box;padding:0;margin: 0;}
+            #vue-app{width: 100%;padding:10px;}
+            .hr-10{width:100%;height:10px;float:none;clear:both;}
+            h1,h2,h3,h4,h5,h6{margin:20px 0px;}
+        </style>
+    </head>
+    <body>
+        <div id="vue-app">
+            <h3>定时任务列表</h3>
+            <el-table :data="search.list" style="width: 100%" :loading="search.loading">
+                <el-table-column  type="index" ></el-table-column>
+                <el-table-column  prop="name" label="名称"></el-table-column>
+                <el-table-column  prop="description" label="描述"></el-table-column>
+                <el-table-column  prop="cron" label="时间表达式"></el-table-column>
+                <el-table-column  prop="httpApiUrl" label="请求URL"></el-table-column>
+                <el-table-column  prop="lastExecuteTimer" label="最后一次执行时间"></el-table-column>
+                <el-table-column  prop="lastResult" label="最后一次执行结果"></el-table-column>
+            </el-table>
+            <div class="hr-10"></div>
+            <el-pagination @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="search.currPage"
+                    :page-sizes="[10, 20, 30, 40]"
+                    :page-size="search.pageSize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="search.totalRow">
+            </el-pagination>
+
+        </h3>
+        <script src="https://cdn.bootcss.com/vue/2.4.1/vue.min.js"></script>
+        <script src="https://cdn.bootcss.com/vue-resource/1.3.4/vue-resource.min.js"></script>
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+        <script>
+            var app = new Vue({
+                el:'#vue-app',
+                data:function(){
+                    return {
+                        search:{currPage:1,pageSize:30,totalRow:0,totalPage:0,loading:false,list:[]}
+                    }
+                },
+                created:function(){
+                    this.loadData();
+                },
+                methods:{
+                    loadData:function(){
+                        if(this.search.loading){return false;}
+                        var that = this;
+                        var params = {page:that.search.currPage,pageSize:that.search.pageSize};
+                        this.search.loading = true;
+                        this.$http({url:'/api/task/list',params:params}).then(data=>{
+                            that.search.loading = false;
+                            if(data.data.code != 200){
+                                alert("数据源加载错误");
+                                return ;
+                            }
+                            console.log(data.data);
+                            that.search.totalRow = data.data.data.totalRow;
+                            that.search.totalPage = data.data.data.totalPage;
+                            that.search.list.splice(0,that.search.list.length);
+                            for(var i = 0 ; i < data.data.data.list.length;i++){
+                                that.search.list.push(data.data.data.list[i]);
+                            }
+                        });
+                    },
+                    handleSizeChange:function(pageSize){
+                        this.search.pageSize = pageSize;
+                        this.loadData();
+                    },
+                    handleCurrentChange:function(page){
+                        this.search.currPage = page;
+                        this.loadData();
+                    }
+                }
+            });
+        </script>
+    <body>
+</html>

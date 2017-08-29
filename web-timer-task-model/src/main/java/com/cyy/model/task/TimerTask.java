@@ -1,5 +1,7 @@
 package com.cyy.model.task;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 /**
@@ -21,6 +23,7 @@ public class TimerTask extends com.cyy.model.BaseModel{
 
     private int typeId;
 
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date lastExecuteTimer;
 
     private int lastResult;
